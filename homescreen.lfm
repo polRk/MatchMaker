@@ -1,0 +1,222 @@
+object HomeForm: THomeForm
+  Left = 0
+  Height = 472
+  Top = 103
+  Width = 492
+  Caption = 'Сваха +'
+  ClientHeight = 472
+  ClientWidth = 492
+  Menu = HomeMenu
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '2.0.8.0'
+  object Pages: TPageControl
+    Left = 8
+    Height = 456
+    Top = 8
+    Width = 476
+    ActivePage = GroomsPage
+    Align = alClient
+    BorderSpacing.Around = 8
+    TabIndex = 1
+    TabOrder = 0
+    object BridesPage: TTabSheet
+      Caption = 'Список невест'
+      ClientHeight = 426
+      ClientWidth = 470
+      object BridesListBox: TListBox
+        Left = 8
+        Height = 410
+        Top = 8
+        Width = 454
+        Align = alClient
+        BorderSpacing.Around = 8
+        ItemHeight = 0
+        OnSelectionChange = BridesActionsToggle
+        PopupMenu = BridesListPopup
+        TabOrder = 0
+      end
+    end
+    object GroomsPage: TTabSheet
+      Caption = 'Список женихов'
+      ClientHeight = 426
+      ClientWidth = 470
+      object GroomsListBox: TListBox
+        Left = 8
+        Height = 410
+        Top = 8
+        Width = 454
+        Align = alClient
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Right = 8
+        BorderSpacing.Bottom = 8
+        Color = clNone
+        ItemHeight = 0
+        OnSelectionChange = GroomsActionsToggle
+        PopupMenu = GroomsListPopup
+        TabOrder = 0
+      end
+    end
+    object CouplesPage: TTabSheet
+      Caption = 'Список пар'
+      ClientHeight = 426
+      ClientWidth = 470
+      OnHide = CouplesPageHide
+      OnShow = CouplesPageShow
+      object CouplesListBox: TListBox
+        Left = 8
+        Height = 410
+        Top = 8
+        Width = 454
+        Align = alClient
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Right = 8
+        BorderSpacing.Bottom = 8
+        ItemHeight = 0
+        PopupMenu = CouplesListPopup
+        TabOrder = 0
+      end
+    end
+  end
+  object BridesListPopup: TPopupMenu
+    OnPopup = BridesActionsToggle
+    left = 232
+    top = 48
+    object BridesFile: TMenuItem
+      Caption = 'Файл'
+      object BridesFileOpen: TMenuItem
+        Action = FileOpen
+      end
+      object BridesFileSave: TMenuItem
+        Action = FileSave
+      end
+      object BridesFileSaveAs: TMenuItem
+        Action = FileSaveAs
+      end
+    end
+    object BridesDivider: TMenuItem
+      Caption = '-'
+    end
+    object BrideAdd: TMenuItem
+      Action = PartnerAdd
+    end
+    object BrideEdit: TMenuItem
+      Action = PartnerEdit
+    end
+    object BrideRemove: TMenuItem
+      Action = PartnerRemove
+    end
+  end
+  object GroomsListPopup: TPopupMenu
+    OnPopup = GroomsActionsToggle
+    left = 232
+    top = 104
+    object GroomsFile: TMenuItem
+      Caption = 'Файл'
+      object GroomsFileOpen: TMenuItem
+        Action = FileOpen
+      end
+      object GroomsFileSave: TMenuItem
+        Action = FileSave
+      end
+      object GroomsFileSaveAs: TMenuItem
+        Action = FileSaveAs
+      end
+    end
+    object GroomAdd: TMenuItem
+      Action = PartnerAdd
+    end
+    object GroomEdit: TMenuItem
+      Action = PartnerEdit
+    end
+    object GroomRemove: TMenuItem
+      Action = PartnerRemove
+    end
+  end
+  object Actions: TActionList
+    left = 232
+    top = 216
+    object FileOpen: TFileOpen
+      Category = 'File'
+      Caption = 'Открыть ...'
+      Dialog.Options = [ofFileMustExist, ofCreatePrompt, ofEnableSizing, ofViewDetail]
+      ShortCut = 16463
+      OnAccept = FileOpenAccept
+    end
+    object FileSave: TAction
+      Category = 'File'
+      Caption = 'Сохранить'
+      DisableIfNoHandler = False
+      Enabled = False
+      Hint = 'Сохранить'
+      OnExecute = FileSaveExecute
+      ShortCut = 16467
+    end
+    object FileSaveAs: TFileSaveAs
+      Category = 'File'
+      Caption = 'Сохранить как ...'
+      ShortCut = 24659
+      OnAccept = FileSaveAsAccept
+    end
+    object PartnerAdd: TAction
+      Caption = 'Добавить'
+      DisableIfNoHandler = False
+      OnExecute = PartnerAddExecute
+      ShortCut = 16449
+    end
+    object PartnerEdit: TAction
+      Caption = 'Редактировать'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = PartnerEditExecute
+      ShortCut = 16453
+    end
+    object PartnerRemove: TAction
+      Caption = 'Удалить'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = PartnerRemoveExecute
+      ShortCut = 16466
+    end
+  end
+  object HomeMenu: TMainMenu
+    left = 232
+    top = 272
+    object MenuFileGroup: TMenuItem
+      Caption = 'Файл'
+      object MenuFileOpen: TMenuItem
+        Action = FileOpen
+      end
+      object MenuFileSave: TMenuItem
+        Action = FileSave
+      end
+      object MenuFileSaveAs: TMenuItem
+        Action = FileSaveAs
+      end
+    end
+    object MenuEditGroup: TMenuItem
+      Caption = 'Правка'
+      object MenuAdd: TMenuItem
+        Action = PartnerAdd
+      end
+      object MenuEdit: TMenuItem
+        Action = PartnerEdit
+      end
+      object MenuRemove: TMenuItem
+        Action = PartnerRemove
+      end
+    end
+  end
+  object CouplesListPopup: TPopupMenu
+    left = 232
+    top = 160
+    object CouplesFileSaveAs: TMenuItem
+      Action = FileSaveAs
+    end
+    object CouplesFileSave: TMenuItem
+      Action = FileSave
+    end
+  end
+end

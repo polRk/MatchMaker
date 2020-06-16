@@ -1,0 +1,209 @@
+object EditForm: TEditForm
+  Left = 0
+  Height = 392
+  Top = 103
+  Width = 272
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Сваха +'
+  ClientHeight = 392
+  ClientWidth = 272
+  OnShow = FormShow
+  LCLVersion = '2.0.8.0'
+  object CriteriaBox: TGroupBox
+    Left = 8
+    Height = 192
+    Top = 159
+    Width = 256
+    Align = alBottom
+    BorderSpacing.Around = 8
+    Caption = 'Критерии подбора'
+    ClientHeight = 173
+    ClientWidth = 246
+    TabOrder = 1
+    object AgeMinInput: TSpinEdit
+      Left = 8
+      Height = 21
+      Top = 32
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 0
+    end
+    object AgeMinLabel: TLabel
+      Left = 8
+      Height = 16
+      Top = 8
+      Width = 73
+      Caption = 'Возраст ОТ'
+      ParentColor = False
+    end
+    object AgeMaxLabel: TLabel
+      Left = 128
+      Height = 16
+      Top = 8
+      Width = 75
+      Caption = 'Возраст ДО'
+      ParentColor = False
+    end
+    object AgeMaxInput: TSpinEdit
+      Left = 128
+      Height = 21
+      Top = 32
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 1
+    end
+    object HeightMinLabel: TLabel
+      Left = 8
+      Height = 16
+      Top = 64
+      Width = 78
+      Caption = 'Рост, см. ОТ'
+      ParentColor = False
+    end
+    object HeightMinInput: TSpinEdit
+      Left = 8
+      Height = 21
+      Top = 88
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 2
+    end
+    object HeightMaxLabel: TLabel
+      Left = 128
+      Height = 16
+      Top = 64
+      Width = 80
+      Caption = 'Рост, см. ДО'
+      ParentColor = False
+    end
+    object HeightMaxInput: TSpinEdit
+      Left = 128
+      Height = 21
+      Top = 88
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 3
+    end
+    object WeightMinLabel: TLabel
+      Left = 8
+      Height = 16
+      Top = 120
+      Width = 68
+      Caption = 'Вес, кг. ОТ'
+      ParentColor = False
+    end
+    object WeightMinInput: TSpinEdit
+      Left = 8
+      Height = 21
+      Top = 144
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 4
+    end
+    object WeightMaxLabel: TLabel
+      Left = 128
+      Height = 16
+      Top = 120
+      Width = 70
+      Caption = 'Вес, кг. ДО'
+      ParentColor = False
+    end
+    object WeightMaxInput: TSpinEdit
+      Left = 128
+      Height = 21
+      Top = 144
+      Width = 112
+      MaxValue = 1000
+      TabOrder = 5
+    end
+  end
+  object ParametersBox: TGroupBox
+    Left = 8
+    Height = 135
+    Top = 8
+    Width = 256
+    Align = alClient
+    BorderSpacing.Bottom = 8
+    BorderSpacing.Around = 8
+    Caption = 'Общая информация'
+    ClientHeight = 116
+    ClientWidth = 246
+    TabOrder = 0
+    object FullNameInput: TEdit
+      Left = 8
+      Height = 22
+      Top = 32
+      Width = 232
+      TabOrder = 0
+    end
+    object AgeInput: TSpinEdit
+      Left = 8
+      Height = 21
+      Top = 88
+      Width = 72
+      MaxValue = 1000
+      TabOrder = 1
+    end
+    object FullNameLabel: TLabel
+      Left = 8
+      Height = 16
+      Top = 8
+      Width = 75
+      Caption = 'Полное имя'
+      ParentColor = False
+    end
+    object AgeLabel: TLabel
+      Left = 8
+      Height = 16
+      Top = 64
+      Width = 52
+      Caption = 'Возраст'
+      ParentColor = False
+    end
+    object HeightLabel: TLabel
+      Left = 88
+      Height = 16
+      Top = 64
+      Width = 57
+      Caption = 'Рост, см.'
+      ParentColor = False
+    end
+    object HeightInput: TSpinEdit
+      Left = 88
+      Height = 21
+      Top = 88
+      Width = 72
+      MaxValue = 1000
+      TabOrder = 2
+    end
+    object WeightLabel: TLabel
+      Left = 168
+      Height = 16
+      Top = 64
+      Width = 46
+      Caption = 'Вес, кг.'
+      ParentColor = False
+    end
+    object WeightInput: TSpinEdit
+      Left = 168
+      Height = 21
+      Top = 88
+      Width = 72
+      MaxValue = 1000
+      TabOrder = 3
+    end
+  end
+  object SaveButton: TButton
+    Left = 8
+    Height = 25
+    Top = 359
+    Width = 256
+    Align = alBottom
+    BorderSpacing.Around = 8
+    Caption = 'Сохранить'
+    ModalResult = 1
+    OnClick = SaveButtonClick
+    TabOrder = 2
+  end
+end
