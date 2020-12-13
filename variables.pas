@@ -5,15 +5,15 @@ unit Variables;
 interface
 
 uses
-  Classes, SysUtils, StdCtrls, PartnerStack, CoupleStack, BipartiteGraph;
+  Classes, SysUtils, StdCtrls, PartnerStack, CoupleStack, HopcroftKarp;
 
 type
   TPartnersFile = file of TPartner;
   TCouplesFile = file of TCouple;
 
 var
-  listOfBrides, listOfGrooms: PartnerCell;
-  listOfCouples: CoupleCell;
+  listOfBrides, listOfGrooms: PartnerNode;
+  listOfCouples: CoupleNode;
 
   graphOfPartners: TBipartiteGraph;
 
@@ -23,18 +23,18 @@ var
   c: TCouple;
 
 { Files }
-procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerCell; l: TListBox);
-procedure ProcessPartnersFileSave(fn: string; var Top: PartnerCell);
-procedure ProcessCouplesFileSave(fn: string; var Top: CoupleCell);
+procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerNode; l: TListBox);
+procedure ProcessPartnersFileSave(fn: string; var Top: PartnerNode);
+procedure ProcessCouplesFileSave(fn: string; var Top: CoupleNode);
 
 { Partner }
 function PartnerToString(p: TPartner): string;
-procedure AddPartner(p: TPartner; var Top: PartnerCell; l: TListBox);
-function FindPartner(fullName: string; var Top: PartnerCell): PartnerCell;
+procedure AddPartner(p: TPartner; var Top: PartnerNode; l: TListBox);
+function FindPartner(fullName: string; var Top: PartnerNode): PartnerNode;
 
 { TListBox }
-procedure DrawListOfPartners(var Top: PartnerCell; l: TListBox);
-procedure DrawListOfCouples(var Top: CoupleCell; l: TListBox);
+procedure DrawListOfPartners(var Top: PartnerNode; l: TListBox);
+procedure DrawListOfCouples(var Top: CoupleNode; l: TListBox);
 
 implementation
 
@@ -43,7 +43,7 @@ Files
 }
 
 { Процедура загрузки типизированного файла списка партнеров }
-procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerCell; l: TListBox);
+procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerNode; l: TListBox);
 var
   f: TPartnersFile;
   p: TPartner;
@@ -66,9 +66,9 @@ begin
 end;
 
 { Процедура сохранения партнеров в типизированный файл }
-procedure ProcessPartnersFileSave(fn: string; var Top: PartnerCell);
+procedure ProcessPartnersFileSave(fn: string; var Top: PartnerNode);
 var
-  Sentinel: PartnerCell;
+  Sentinel: PartnerNode;
   f: TPartnersFile;
 begin
   AssignFile(f, fn);
@@ -89,9 +89,9 @@ begin
 end;
 
 { Процедура сохранения пар в типизированный файл }
-procedure ProcessCouplesFileSave(fn: string; var Top: CoupleCell);
+procedure ProcessCouplesFileSave(fn: string; var Top: CoupleNode);
 var
-  Sentinel: CoupleCell;
+  Sentinel: CoupleNode;
   f: TCouplesFile;
 begin
   AssignFile(f, fn);
@@ -123,7 +123,7 @@ begin
 end;
 
 { Процедура добавления партнера в приложение }
-procedure AddPartner(p: TPartner; var Top: PartnerCell; l: TListBox);
+procedure AddPartner(p: TPartner; var Top: PartnerNode; l: TListBox);
 begin
   PartnerStack.Push(Top, p);
   PartnerStack.Sort(Top);
@@ -131,9 +131,9 @@ begin
 end;
 
 { Поиск партнера по полному имени (поле FullName) }
-function FindPartner(fullName: string; var Top: PartnerCell): PartnerCell;
+function FindPartner(fullName: string; var Top: PartnerNode): PartnerNode;
 var
-  TempCell: PartnerCell;
+  TempCell: PartnerNode;
 begin
   TempCell := Top;
 
@@ -157,9 +157,9 @@ TListBox
 }
 
 { Процедура отрисовки списка партнеров }
-procedure DrawListOfPartners(var Top: PartnerCell; l: TListBox);
+procedure DrawListOfPartners(var Top: PartnerNode; l: TListBox);
 var
-  TempCell: PartnerCell;
+  TempCell: PartnerNode;
 begin
   l.Clear;
   TempCell := Top;
@@ -174,9 +174,9 @@ begin
 end;
 
 { Процедура отрисовки списка пар }
-procedure DrawListOfCouples(var Top: CoupleCell; l: TListBox);
+procedure DrawListOfCouples(var Top: CoupleNode; l: TListBox);
 var
-  TempCell: CoupleCell;
+  TempCell: CoupleNode;
 begin
   l.Clear;
   TempCell := Top;

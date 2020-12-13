@@ -8,59 +8,65 @@ uses
   Classes, SysUtils, PartnerStack;
 
 type
+  CoupleNode = ^TCoupleNode;
+
+  Couple = ^TCouple;
 
   TCouple = record
     Bride: TPartner;
     Groom: TPartner;
   end;
 
-  CoupleCell = ^TCoupleCell;
-
-  TCoupleCell = record
+  TCoupleNode = record
     Data: TCouple;
-    Next: CoupleCell;
+    Next: CoupleNode;
   end;
 
 { CoupleStack }
-function Pop(var Top: CoupleCell): TCouple;
-procedure Push(var Top: CoupleCell; Data: TCouple);
-procedure Free(var Top: CoupleCell);
+function NewCouple(const Bride: TPartner; const Groom: TPartner): TCouple;
+function Pop(var Top: CoupleNode): TCouple;
+procedure Push(var Top: CoupleNode; const C: TCouple);
+procedure Free(var Top: CoupleNode);
 
 implementation
 
-{ Получение элемента с верха стэка }
-function Pop(var Top: CoupleCell): TCouple;
+{ Создание новой вершины }
+function NewCouple(const Bride: TPartner; const Groom: TPartner): TCouple;
 var
-  TempCell: CoupleCell;
+  C: TCouple;
+begin
+  C.Bride := Bride;
+  C.Groom := Groom;
+  Result := C;
+end;
+
+{ Процедура удаления верхнего(последнего) элемента стэка }
+function Pop(var Top: CoupleNode): TCouple;
+var
+  TempNode: CoupleNode = nil;
 begin
   Result := Top^.Data;
-  TempCell := Top;
+  TempNode := Top;
   Top := Top^.Next;
-  Dispose(TempCell);
+  Dispose(TempNode);
 end;
 
 { Процедура добавления элемента на верх стэка }
-procedure Push(var Top: CoupleCell; Data: TCouple);
+procedure Push(var Top: CoupleNode; const C: TCouple);
 var
-  NewCell: CoupleCell;
+  TempNode: CoupleNode = nil;
 begin
-  New(NewCell);
-  NewCell^.Data := Data;
-  NewCell^.Next := Top;
-  Top := NewCell;
+  New(TempNode);
+  TempNode^.Data := C;
+  TempNode^.Next := Top;
+  Top := TempNode;
 end;
 
 { Процедура освобождения памяти занятой стэком }
-procedure Free(var Top: CoupleCell);
-var
-  TempCell: CoupleCell;
+procedure Free(var Top: CoupleNode);
 begin
   while Top <> nil do
-  begin
-    TempCell := Top;
-    Top := Top^.Next;
-    Dispose(TempCell);
-  end;
+    Pop(Top);
 end;
 
 end.

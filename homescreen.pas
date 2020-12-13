@@ -231,16 +231,15 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    p := CreateEmptyPartner(PartnerSex.woman);
+    p := PartnerStack.NewPartner('', PartnerSex.woman);
     EditForm.Caption := 'Добавить невесту';
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    p := CreateEmptyPartner(PartnerSex.man);
+    p := PartnerStack.NewPartner('', PartnerSex.man);
     EditForm.Caption := 'Добавить жениха';
   end;
-
 
   Result := EditForm.ShowModal;
   if (Result = mrCancel) or (p.FullName = '') then
@@ -257,7 +256,7 @@ end;
 procedure THomeForm.PartnerEditExecute(Sender: TObject);
 var
   Result: TModalResult;
-  s: PartnerCell;
+  TempNode: PartnerNode = nil;
 begin
   EditForm := TEditForm.Create(Application);
   EditForm.Left := HomeForm.Left;
@@ -269,15 +268,15 @@ begin
     EditForm.Caption := 'Редактировать жениха';
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
-    s := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
+    TempNode := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
-    s := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
+    TempNode := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
 
-  if s = nil then
+  if TempNode = nil then
     Exit;
 
-  p := s^.Data;
+  p := TempNode^.Data;
 
   Result := EditForm.ShowModal;
   if Result = mrCancel then
@@ -285,14 +284,14 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    PartnerStack.Delete(listOfBrides, s);
+    PartnerStack.Delete(listOfBrides, TempNode);
     AddPartner(p, listOfBrides, BridesListBox);
     BridesListBox.ItemIndex := -1;
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    PartnerStack.Delete(listOfGrooms, s);
+    PartnerStack.Delete(listOfGrooms, TempNode);
     AddPartner(p, listOfGrooms, GroomsListBox);
     GroomsListBox.ItemIndex := -1;
   end;
@@ -300,7 +299,7 @@ end;
 
 procedure THomeForm.PartnerRemoveExecute(Sender: TObject);
 var
-  s: PartnerCell;
+  TempPartner: PartnerNode;
 begin
   if MessageDlg('Подтвердите удаление', mtConfirmation,
     [mbYes, mbNo], 0) <> mrYes then
@@ -308,16 +307,16 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    s := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
-    PartnerStack.Delete(listOfBrides, s);
+    TempPartner := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
+    PartnerStack.Delete(listOfBrides, TempPartner);
     BridesListBox.Items.Delete(BridesListBox.ItemIndex);
     BridesListBox.ItemIndex := -1;
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    s := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
-    PartnerStack.Delete(listOfGrooms, s);
+    TempPartner := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
+    PartnerStack.Delete(listOfGrooms, TempPartner);
     GroomsListBox.Items.Delete(GroomsListBox.ItemIndex);
     GroomsListBox.ItemIndex := -1;
   end;

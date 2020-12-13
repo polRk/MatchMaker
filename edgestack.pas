@@ -8,85 +8,96 @@ uses
   Classes, SysUtils, VertexStack;
 
 type
+  EdgeNode = ^TEdgeNode;
 
   Edge = ^TEdge;
 
   TEdge = record
-    Bride: Vertex;
-    Groom: Vertex;
-    Next: Edge;
+    Bride: VertexNode;
+    Groom: VertexNode;
   end;
 
-procedure Pop(var Top: Edge);
-procedure Push(var Top: Edge; const Bride: Vertex; const Groom: Vertex);
-procedure Delete(var Top: Edge; P: Edge);
-procedure Free(var Top: Edge);
+  TEdgeNode = record
+    Data: Edge;
+    Next: EdgeNode;
+  end;
+
+function NewEdge(const Bride: VertexNode; const Groom: VertexNode): Edge;
+
+function Pop(var Top: EdgeNode): Edge;
+procedure Push(var Top: EdgeNode; const E: Edge);
+procedure Delete(var Top: EdgeNode; var E: EdgeNode);
+procedure Free(var Top: EdgeNode);
 
 implementation
 
-{ Получение элемента с верха стэка }
-procedure Pop(var Top: Edge);
+{ Создание нового звена }
+function NewEdge(const Bride: VertexNode; const Groom: VertexNode): Edge;
 var
-  TempEdge: Edge;
+  E: Edge = nil;
 begin
-  TempEdge := Top;
+  New(E);
+  E^.Bride := Bride;
+  E^.Groom := Groom;
+  Result := E;
+end;
+
+{ Процедура удаления верхнего(последнего) элемента стэка }
+function Pop(var Top: EdgeNode): Edge;
+var
+  TempNode: EdgeNode = nil;
+begin
+  Result := Top^.Data;
+  TempNode := Top;
   Top := Top^.Next;
-  Dispose(TempEdge);
+  Dispose(TempNode);
 end;
 
 { Процедура добавления элемента на верх стэка }
-procedure Push(var Top: Edge; const Bride: Vertex; const Groom: Vertex);
+procedure Push(var Top: EdgeNode; const E: Edge);
 var
-  NewEdge: Edge;
+  TempNode: EdgeNode = nil;
 begin
-  New(NewEdge);
-  NewEdge^.Bride := Bride;
-  NewEdge^.Groom := Groom;
-  NewEdge^.Next := Top;
-  Top := NewEdge;
+  New(TempNode);
+  TempNode^.Data := E;
+  TempNode^.Next := Top;
+  Top := TempNode;
 end;
 
 { Процедура удаления элемента по указателю из стэка }
-procedure Delete(var Top: Edge; P: Edge);
+procedure Delete(var Top: EdgeNode; var E: EdgeNode);
 var
-  TempEdge: Edge = nil;
+  TempNode: EdgeNode = nil;
 begin
-  if (Top = nil) or (P = nil) then
+  if (Top = nil) or (E = nil) then
     Exit;
 
+  // Сохраняю ссылку на верхний элемент списка
+  TempNode := Top;
+
+  // Пока не дошли до конца списка
   while Top <> nil do
   begin
-    if Top = P then
+    // Если верхний элемент - нужный элемент, то удаляю и выхожу из цикла
+    if Top = E then
     begin
       Pop(Top);
       break;
     end;
 
-    if Top <> nil then
-    begin
-      Push(TempEdge, Top^.Bride, Top^.Groom);
-      Top := Top^.Next;
-    end;
+    // Заменяю верхний элемент списка последующим
+    Top := Top^.Next;
   end;
 
-  while TempEdge <> nil do
-  begin
-    Push(Top, TempEdge^.Bride, TempEdge^.Groom);
-    Pop(TempEdge);
-  end;
+  // Восстанавливаю ссылку на верхний элемент списка
+  Top := TempNode;
 end;
 
 { Процедура освобождения памяти занятой стэком }
-procedure Free(var Top: Edge);
-var
-  TempEdge: Edge;
+procedure Free(var Top: EdgeNode);
 begin
   while Top <> nil do
-  begin
-    TempEdge := Top;
-    Top := Top^.Next;
-    Dispose(TempEdge);
-  end;
+    Pop(Top);
 end;
 
 end.
