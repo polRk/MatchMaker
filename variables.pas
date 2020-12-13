@@ -19,6 +19,7 @@ var
 
   bridesFN, groomsFN, couplesFN: string;
 
+  // Использую для записи данных из окна редактирования
   CurrentPartner: TPartner;
 
 { Files }
