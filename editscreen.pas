@@ -59,38 +59,38 @@ uses Variables;
 
 procedure TEditForm.SaveButtonClick(Sender: TObject);
 begin
-  p.FullName := FullNameInput.Text;
+  CurrentPartner.FullName := FullNameInput.Text;
 
-  p.Parameters.Age := AgeInput.Value;
-  p.Parameters.Height := HeightInput.Value;
-  p.Parameters.Weight := WeightInput.Value;
+  CurrentPartner.Parameters.Age := AgeInput.Value;
+  CurrentPartner.Parameters.Height := HeightInput.Value;
+  CurrentPartner.Parameters.Weight := WeightInput.Value;
 
-  p.Criteria.AgeMin := AgeMinInput.Value;
-  p.Criteria.AgeMax := AgeMaxInput.Value;
+  CurrentPartner.Criteria.AgeMin := AgeMinInput.Value;
+  CurrentPartner.Criteria.AgeMax := AgeMaxInput.Value;
 
-  p.Criteria.HeightMin := HeightMinInput.Value;
-  p.Criteria.HeightMax := HeightMaxInput.Value;
+  CurrentPartner.Criteria.HeightMin := HeightMinInput.Value;
+  CurrentPartner.Criteria.HeightMax := HeightMaxInput.Value;
 
-  p.Criteria.WeightMin := WeightMinInput.Value;
-  p.Criteria.WeightMax := WeightMaxInput.Value;
+  CurrentPartner.Criteria.WeightMin := WeightMinInput.Value;
+  CurrentPartner.Criteria.WeightMax := WeightMaxInput.Value;
 end;
 
 procedure TEditForm.FormShow(Sender: TObject);
 begin
-  FullNameInput.Text := p.FullName;
+  FullNameInput.Text := CurrentPartner.FullName;
 
-  AgeInput.Value := p.Parameters.Age;
-  HeightInput.Value := p.Parameters.Height;
-  WeightInput.Value := p.Parameters.Weight;
+  AgeInput.Value := CurrentPartner.Parameters.Age;
+  HeightInput.Value := CurrentPartner.Parameters.Height;
+  WeightInput.Value := CurrentPartner.Parameters.Weight;
 
-  AgeMinInput.Value := p.Criteria.AgeMin;
-  AgeMaxInput.Value := p.Criteria.AgeMax;
+  AgeMinInput.Value := CurrentPartner.Criteria.AgeMin;
+  AgeMaxInput.Value := CurrentPartner.Criteria.AgeMax;
 
-  HeightMinInput.Value := p.Criteria.HeightMin;
-  HeightMaxInput.Value := p.Criteria.HeightMax;
+  HeightMinInput.Value := CurrentPartner.Criteria.HeightMin;
+  HeightMaxInput.Value := CurrentPartner.Criteria.HeightMax;
 
-  WeightMinInput.Value := p.Criteria.WeightMin;
-  WeightMaxInput.Value := p.Criteria.WeightMax;
+  WeightMinInput.Value := CurrentPartner.Criteria.WeightMin;
+  WeightMaxInput.Value := CurrentPartner.Criteria.WeightMax;
 end;
 
 end.

@@ -231,25 +231,25 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    p := PartnerStack.NewPartner('', PartnerSex.woman);
+    CurrentPartner := PartnerStack.NewPartner('', PartnerSex.woman);
     EditForm.Caption := 'Добавить невесту';
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    p := PartnerStack.NewPartner('', PartnerSex.man);
+    CurrentPartner := PartnerStack.NewPartner('', PartnerSex.man);
     EditForm.Caption := 'Добавить жениха';
   end;
 
   Result := EditForm.ShowModal;
-  if (Result = mrCancel) or (p.FullName = '') then
+  if (Result = mrCancel) or (CurrentPartner.FullName = '') then
     Exit;
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
-    AddPartner(p, listOfBrides, BridesListBox);
+    AddPartner(CurrentPartner, listOfBrides, BridesListBox);
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
-    AddPartner(p, listOfGrooms, GroomsListBox);
+    AddPartner(CurrentPartner, listOfGrooms, GroomsListBox);
 
 end;
 
@@ -276,7 +276,7 @@ begin
   if TempNode = nil then
     Exit;
 
-  p := TempNode^.Data;
+  CurrentPartner := TempNode^.Data;
 
   Result := EditForm.ShowModal;
   if Result = mrCancel then
@@ -285,14 +285,14 @@ begin
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
     PartnerStack.Delete(listOfBrides, TempNode);
-    AddPartner(p, listOfBrides, BridesListBox);
+    AddPartner(CurrentPartner, listOfBrides, BridesListBox);
     BridesListBox.ItemIndex := -1;
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
     PartnerStack.Delete(listOfGrooms, TempNode);
-    AddPartner(p, listOfGrooms, GroomsListBox);
+    AddPartner(CurrentPartner, listOfGrooms, GroomsListBox);
     GroomsListBox.ItemIndex := -1;
   end;
 end;

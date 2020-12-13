@@ -19,8 +19,7 @@ var
 
   bridesFN, groomsFN, couplesFN: string;
 
-  p: TPartner;
-  c: TCouple;
+  CurrentPartner: TPartner;
 
 { Files }
 procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerNode; l: TListBox);
