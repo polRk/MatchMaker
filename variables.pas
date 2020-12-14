@@ -12,29 +12,30 @@ type
   TCouplesFile = file of TCouple;
 
 var
-  listOfBrides, listOfGrooms: PartnerNode;
-  listOfCouples: CoupleNode;
+  listOfBrides: PartnerNode = nil;
+  listOfGrooms: PartnerNode = nil;
+  listOfCouples: CoupleNode = nil;
 
   graphOfPartners: TBipartiteGraph;
 
   bridesFN, groomsFN, couplesFN: string;
 
   // Использую для записи данных из окна редактирования
-  CurrentPartner: TPartner;
+  currentPartner: TPartner;
 
 { Files }
-procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerNode; l: TListBox);
-procedure ProcessPartnersFileSave(fn: string; var Top: PartnerNode);
-procedure ProcessCouplesFileSave(fn: string; var Top: CoupleNode);
+procedure ProcessPartnersFileOpen(FileName: string; var Top: PartnerNode; L: TListBox);
+procedure ProcessPartnersFileSave(FileName: string; var Top: PartnerNode);
+procedure ProcessCouplesFileSave(FileName: string; var Top: CoupleNode);
 
 { Partner }
-function PartnerToString(p: TPartner): string;
-procedure AddPartner(p: TPartner; var Top: PartnerNode; l: TListBox);
-function FindPartner(fullName: string; var Top: PartnerNode): PartnerNode;
+function PartnerToString(P: TPartner): string;
+procedure AddPartner(P: TPartner; var Top: PartnerNode; L: TListBox);
+function FindPartner(FullName: string; var Top: PartnerNode): PartnerNode;
 
 { TListBox }
-procedure DrawListOfPartners(var Top: PartnerNode; l: TListBox);
-procedure DrawListOfCouples(var Top: CoupleNode; l: TListBox);
+procedure DrawListOfPartners(var Top: PartnerNode; L: TListBox);
+procedure DrawListOfCouples(var Top: CoupleNode; L: TListBox);
 
 implementation
 
@@ -43,72 +44,72 @@ Files
 }
 
 { Процедура загрузки типизированного файла списка партнеров }
-procedure ProcessPartnersFileOpen(fn: string; var Top: PartnerNode; l: TListBox);
+procedure ProcessPartnersFileOpen(FileName: string; var Top: PartnerNode; L: TListBox);
 var
-  f: TPartnersFile;
-  p: TPartner;
+  PartnersFile: TPartnersFile;
+  P: TPartner;
 begin
-  AssignFile(f, fn);
-  Reset(f);
+  AssignFile(PartnersFile, FileName);
+  Reset(PartnersFile);
 
   PartnerStack.Free(Top);
-  l.Clear;
+  L.Clear;
 
-  while not EOF(f) do
+  while not EOF(PartnersFile) do
   begin
-    Read(f, p);
-    PartnerStack.Push(Top, p);
+    Read(PartnersFile, P);
+    PartnerStack.Push(Top, P);
   end;
 
   PartnerStack.Sort(Top);
-  DrawListOfPartners(Top, l);
-  CloseFile(f);
+  DrawListOfPartners(Top, L);
+  CloseFile(PartnersFile);
 end;
 
 { Процедура сохранения партнеров в типизированный файл }
-procedure ProcessPartnersFileSave(fn: string; var Top: PartnerNode);
+procedure ProcessPartnersFileSave(FileName: string; var Top: PartnerNode);
 var
-  Sentinel: PartnerNode;
-  f: TPartnersFile;
+  PartnersFile: TPartnersFile;
+  TempNode: PartnerNode;
 begin
-  AssignFile(f, fn);
-  Rewrite(f);
+  AssignFile(PartnersFile, FileName);
+  Rewrite(PartnersFile);
 
-  Sentinel := Top;
+  TempNode := Top;
 
   while Top <> nil do
   begin
-    Write(f, Top^.Data);
+    Write(PartnersFile, Top^.Data);
 
     Top := Top^.Next;
   end;
 
-  CloseFile(f);
+  CloseFile(PartnersFile);
 
-  Top := Sentinel;
+  Top := TempNode;
 end;
 
 { Процедура сохранения пар в типизированный файл }
-procedure ProcessCouplesFileSave(fn: string; var Top: CoupleNode);
+procedure ProcessCouplesFileSave(FileName: string; var Top: CoupleNode);
 var
-  Sentinel: CoupleNode;
-  f: TCouplesFile;
+  CouplesFile: TCouplesFile;
+  TempNode: CoupleNode;
 begin
-  AssignFile(f, fn);
-  Rewrite(f);
+  AssignFile(CouplesFile, FileName);
+  Rewrite(CouplesFile);
 
-  Sentinel := Top;
+  TempNode := Top;
 
   while Top <> nil do
   begin
-    Write(f, Top^.Data);
+    Write(CouplesFile, Top^.Data);
 
     Top := Top^.Next;
   end;
 
-  CloseFile(f);
+  CloseFile(CouplesFile);
 
-  Top := Sentinel;
+  Top := TempNode;
 end;
 
 {
@@ -116,40 +117,39 @@ Partner
 }
 
 { Представление записи о партнере в виде строки }
-function PartnerToString(p: TPartner): string;
+function PartnerToString(P: TPartner): string;
 begin
   Result := Format('%s: Возраст - %d, Рост - %d, Вес - %d',
-    [p.FullName, p.Parameters.Age, p.Parameters.Height, p.Parameters.Weight]);
+    [P.FullName, P.Parameters.Age, P.Parameters.Height, P.Parameters.Weight]);
 end;
 
 { Процедура добавления партнера в приложение }
-procedure AddPartner(p: TPartner; var Top: PartnerNode; l: TListBox);
+procedure AddPartner(P: TPartner; var Top: PartnerNode; L: TListBox);
 begin
-  PartnerStack.Push(Top, p);
+  PartnerStack.Push(Top, P);
   PartnerStack.Sort(Top);
-  DrawListOfPartners(Top, l);
+  DrawListOfPartners(Top, L);
 end;
 
 { Поиск партнера по полному имени (поле FullName) }
-function FindPartner(fullName: string; var Top: PartnerNode): PartnerNode;
+function FindPartner(FullName: string; var Top: PartnerNode): PartnerNode;
 var
-  TempCell: PartnerNode;
+  TempNode: PartnerNode;
 begin
-  TempCell := Top;
+  TempNode := Top;
 
   while Top <> nil do
   begin
-    if Top^.Data.FullName = fullName then
+    if Top^.Data.FullName = FullName then
     begin
       Result := Top;
       break;
-    end
+    end;
 
-    else
-      Top := Top^.Next;
+    Top := Top^.Next;
   end;
 
-  Top := TempCell;
+  Top := TempNode;
 end;
 
 {
@@ -157,33 +157,33 @@ TListBox
 }
 
 { Процедура отрисовки списка партнеров }
-procedure DrawListOfPartners(var Top: PartnerNode; l: TListBox);
+procedure DrawListOfPartners(var Top: PartnerNode; L: TListBox);
 var
-  TempCell: PartnerNode;
+  TempNode: PartnerNode;
 begin
-  l.Clear;
-  TempCell := Top;
+  L.Clear;
+  TempNode := Top;
 
   while Top <> nil do
   begin
-    l.Items.Add(Top^.Data.FullName);
+    L.Items.Add(Top^.Data.FullName);
     Top := Top^.Next;
   end;
 
-  Top := TempCell;
+  Top := TempNode;
 end;
 
 { Процедура отрисовки списка пар }
-procedure DrawListOfCouples(var Top: CoupleNode; l: TListBox);
+procedure DrawListOfCouples(var Top: CoupleNode; L: TListBox);
 var
   TempCell: CoupleNode;
 begin
-  l.Clear;
+  L.Clear;
   TempCell := Top;
 
   while Top <> nil do
   begin
-    l.Items.Add(Top^.Data.Bride.FullName + ' - ' + Top^.Data.Groom.FullName);
+    L.Items.Add(Top^.Data.Bride.FullName + ' - ' + Top^.Data.Groom.FullName);
     Top := Top^.Next;
   end;
 

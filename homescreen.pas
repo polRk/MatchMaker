@@ -231,25 +231,25 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    CurrentPartner := PartnerStack.NewPartner('', PartnerSex.woman);
+    currentPartner := PartnerStack.NewPartner('', PartnerSex.woman);
     EditForm.Caption := 'Добавить невесту';
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    CurrentPartner := PartnerStack.NewPartner('', PartnerSex.man);
+    currentPartner := PartnerStack.NewPartner('', PartnerSex.man);
     EditForm.Caption := 'Добавить жениха';
   end;
 
   Result := EditForm.ShowModal;
-  if (Result = mrCancel) or (CurrentPartner.FullName = '') then
+  if (Result = mrCancel) or (currentPartner.FullName = '') then
     Exit;
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
-    AddPartner(CurrentPartner, listOfBrides, BridesListBox);
+    AddPartner(currentPartner, listOfBrides, BridesListBox);
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
-    AddPartner(CurrentPartner, listOfGrooms, GroomsListBox);
+    AddPartner(currentPartner, listOfGrooms, GroomsListBox);
 
 end;
 
@@ -276,7 +276,7 @@ begin
   if TempNode = nil then
     Exit;
 
-  CurrentPartner := TempNode^.Data;
+  currentPartner := TempNode^.Data;
 
   Result := EditForm.ShowModal;
   if Result = mrCancel then
@@ -285,21 +285,21 @@ begin
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
     PartnerStack.Delete(listOfBrides, TempNode);
-    AddPartner(CurrentPartner, listOfBrides, BridesListBox);
+    AddPartner(currentPartner, listOfBrides, BridesListBox);
     BridesListBox.ItemIndex := -1;
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
     PartnerStack.Delete(listOfGrooms, TempNode);
-    AddPartner(CurrentPartner, listOfGrooms, GroomsListBox);
+    AddPartner(currentPartner, listOfGrooms, GroomsListBox);
     GroomsListBox.ItemIndex := -1;
   end;
 end;
 
 procedure THomeForm.PartnerRemoveExecute(Sender: TObject);
 var
-  TempPartner: PartnerNode;
+  P: PartnerNode;
 begin
   if MessageDlg('Подтвердите удаление', mtConfirmation,
     [mbYes, mbNo], 0) <> mrYes then
@@ -307,16 +307,16 @@ begin
 
   if Pages.ActivePageIndex = BridesPage.PageIndex then
   begin
-    TempPartner := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
-    PartnerStack.Delete(listOfBrides, TempPartner);
+    P := FindPartner(BridesListBox.GetSelectedText, listOfBrides);
+    PartnerStack.Delete(listOfBrides, P);
     BridesListBox.Items.Delete(BridesListBox.ItemIndex);
     BridesListBox.ItemIndex := -1;
   end;
 
   if Pages.ActivePageIndex = GroomsPage.PageIndex then
   begin
-    TempPartner := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
-    PartnerStack.Delete(listOfGrooms, TempPartner);
+    P := FindPartner(GroomsListBox.GetSelectedText, listOfGrooms);
+    PartnerStack.Delete(listOfGrooms, P);
     GroomsListBox.Items.Delete(GroomsListBox.ItemIndex);
     GroomsListBox.ItemIndex := -1;
   end;

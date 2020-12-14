@@ -76,15 +76,17 @@ begin
   FreeVertex := GraphBFS(G);
   while FreeVertex <> nil do
   begin
+
     // Если нет увеличивающегося пути из свободной вершины,
     // то помечаю вершину как несвободную
     if GraphDFS(G, FreeVertex) <> True then
-      FreeVertex^.Data^.IsFree := False;
+      FreeVertex^.Data^.IsFree := False
+    else
+      // Увеличиваю Matches за счет увеличивающегося пути.
+      GetMatches(G);
 
     // Убираю отметки о посещении
     CleanVisitedMarks(G);
-    // Увеличиваю Matches за счет увеличивающегося пути.
-    GetMatches(G);
     // Удаляю увеличивающийся путь
     EdgeStack.Free(G.AugmentingPath);
     // Получаю следующую свободную вершину
@@ -138,7 +140,7 @@ end;
 { Обход графа в глубину начиная от вершины V. Поиск дополняющего пути }
 function GraphDFS(var G: TBipartiteGraph; var V: VertexNode): boolean;
 var
-  TempVertex: VertexNode;
+  TempNode: VertexNode;
   SuitablePartner: VertexNode;
 begin
   if (V = nil) or V^.Data^.IsVisited then
@@ -149,8 +151,8 @@ begin
 
   // Помечаю точку как посещенную
   V^.Data^.IsVisited := True;
-  TempVertex := V^.Data^.SuitablePartners;
 
+  TempNode := V^.Data^.SuitablePartners;
   while V^.Data^.SuitablePartners <> nil do
   begin
     SuitablePartner := V^.Data^.SuitablePartners;
@@ -161,14 +163,10 @@ begin
     begin
 
       // Добавляю пару в увеличивающийся путь
-      EdgeStack.Push(G.AugmentingPath, EdgeStack.NewEdge(v, SuitablePartner));
-
-      //// Добавляю пару в виде Невеста-Жених
-      //if V^.Data.Partner.Sex = PartnerSex.man then
-      //  AddMatch(G, EdgeStack.NewEdge(SuitablePartner, V))
-      //else
-      //  AddMatch(G, EdgeStack.NewEdge(V, SuitablePartner));
-
+      if V^.Data^.Partner.Sex = PartnerSex.man then
+        EdgeStack.Push(G.AugmentingPath, EdgeStack.NewEdge(SuitablePartner, V))
+      else
+        EdgeStack.Push(G.AugmentingPath, EdgeStack.NewEdge(V, SuitablePartner));
 
       // Отмечаем точку как занятую(есть партнер)
       V^.Data^.IsFree := False;
@@ -176,7 +174,7 @@ begin
       SuitablePartner^.Data^.IsFree := False;
 
       Result := True;
-      V^.Data^.SuitablePartners := TempVertex;
+      V^.Data^.SuitablePartners := TempNode;
       Exit;
     end;
 
@@ -184,13 +182,14 @@ begin
   end;
 
   Result := False;
-  V^.Data^.SuitablePartners := TempVertex;
+  V^.Data^.SuitablePartners := TempNode;
 end;
 
 { Процедура удаления отметок о посещении }
 procedure CleanVisitedMarks(var G: TBipartiteGraph);
 var
   TempVertex: VertexNode;
+  TempNode: VertexNode;
 begin
   TempVertex := G.Brides;
 
@@ -199,6 +198,7 @@ begin
     G.Brides^.Data^.IsVisited := False;
     G.Brides := G.Brides^.Next;
   end;
+  TempNode := G.Brides;
 
   G.Brides := TempVertex;
   TempVertex := G.Grooms;
@@ -210,20 +210,49 @@ begin
   end;
 
   G.Grooms := TempVertex;
+  G.Grooms := TempNode;
 end;
 
 { Процедура увеличения списка сочетаний }
 procedure GetMatches(var G: TBipartiteGraph);
+var
+  TempAugmentingPath: EdgeNode = nil;
+  TempMatches: EdgeNode = nil;
 begin
-  while G.Matches <> nil do
-  begin
 
-    while G.AugmentingPath <> nil do
+  TempAugmentingPath := G.AugmentingPath;
+
+  while G.AugmentingPath <> nil do
+  begin
+    TempMatches := G.Matches;
+
+    while G.Matches <> nil do
     begin
-      // TODO
+      if (G.Matches^.Data^.Bride^.Data^.Partner.FullName =
+        G.AugmentingPath^.Data^.Bride^.Data^.Partner.FullName) and
+        (G.Matches^.Data^.Groom^.Data^.Partner.FullName =
+        G.AugmentingPath^.Data^.Groom^.Data^.Partner.FullName) then
+      begin
+        EdgeStack.Delete(TempAugmentingPath, G.AugmentingPath);
+        EdgeStack.Delete(TempMatches, G.Matches);
+      end;
+
+      G.Matches := G.Matches^.Next;
     end;
 
+    G.Matches := TempMatches;
+    G.AugmentingPath := G.AugmentingPath^.Next;
   end;
+
+  G.AugmentingPath := TempAugmentingPath;
+
+  while G.AugmentingPath <> nil do
+  begin
+    EdgeStack.Push(G.Matches, G.AugmentingPath^.Data);
+    G.AugmentingPath := G.AugmentingPath^.Next;
+  end;
+
+  G.AugmentingPath := TempAugmentingPath;
 end;
 
 { Процедура загрузки женихов в граф }

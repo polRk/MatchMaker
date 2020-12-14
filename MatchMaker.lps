@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="14">
+    <Units Count="17">
       <Unit0>
         <Filename Value="MatchMaker.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -18,10 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="HomeScreen"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="132"/>
-        <CursorPos X="15" Y="243"/>
-        <FoldState Value=" T3j60I224214"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="272"/>
+        <CursorPos X="22" Y="305"/>
+        <FoldState Value=" T3j60I224m"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -32,9 +32,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="EditScreen"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="49"/>
-        <CursorPos X="41" Y="93"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="43"/>
+        <CursorPos Y="77"/>
         <UsageCount Value="280"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -42,9 +42,9 @@
         <Filename Value="variables.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Variables"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <CursorPos X="28" Y="22"/>
+        <TopLine Value="105"/>
+        <CursorPos Y="128"/>
         <UsageCount Value="276"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -52,10 +52,12 @@
         <Filename Value="hopcroftkarp.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HopcroftKarp"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="192"/>
-        <CursorPos X="22" Y="224"/>
-        <UsageCount Value="197"/>
+        <TopLine Value="220"/>
+        <CursorPos X="30" Y="243"/>
+        <FoldState Value=" T3kB0j1F"/>
+        <UsageCount Value="230"/>
         <Bookmarks Count="1">
           <Item0 Y="25"/>
         </Bookmarks>
@@ -65,10 +67,10 @@
         <Filename Value="partnerstack.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PartnerStack"/>
-        <TopLine Value="125"/>
-        <CursorPos X="43" Y="131"/>
-        <FoldState Value=" TCCDD T3ib0C0219"/>
-        <UsageCount Value="112"/>
+        <TopLine Value="123"/>
+        <CursorPos Y="130"/>
+        <FoldState Value=" TCCDD T3kT043"/>
+        <UsageCount Value="152"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -78,16 +80,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="144"/>
         <CursorPos X="44" Y="146"/>
-        <UsageCount Value="102"/>
+        <UsageCount Value="142"/>
       </Unit6>
       <Unit7>
         <Filename Value="vertexstack.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="VertexStack"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="29"/>
+        <TopLine Value="38"/>
         <CursorPos X="6" Y="41"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="118"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -95,17 +97,17 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="EdgeStack"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="3"/>
-        <CursorPos X="38" Y="27"/>
-        <UsageCount Value="75"/>
+        <CursorPos X="5" Y="17"/>
+        <UsageCount Value="115"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="couplestack.pas"/>
         <UnitName Value="CoupleStack"/>
         <EditorIndex Value="1"/>
+        <TopLine Value="19"/>
         <CursorPos X="20" Y="66"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -114,150 +116,170 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="37"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="18"/>
       </Unit10>
       <Unit11>
-        <Filename Value="/usr/local/share/fpcsrc/3.0.4/rtl/objpas/fgl.pp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="235"/>
-        <CursorPos Y="154"/>
-        <UsageCount Value="3"/>
-      </Unit11>
-      <Unit12>
         <Filename Value="homescreen.lfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="32" Y="14"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="17"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
-      </Unit12>
-      <Unit13>
+      </Unit11>
+      <Unit12>
         <Filename Value="../../Lazarus/lcl/include/custompage.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="184"/>
-        <CursorPos Y="201"/>
+        <TopLine Value="139"/>
+        <CursorPos Y="170"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../Lazarus/lcl/include/pagecontrol.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="23"/>
         <UsageCount Value="10"/>
       </Unit13>
+      <Unit14>
+        <Filename Value="../../Lazarus/lcl/include/customnotebook.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="358"/>
+        <CursorPos Y="385"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../Lazarus/lcl/include/customlistbox.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="707"/>
+        <CursorPos Y="735"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../Lazarus/lcl/interfaces/win32/win32listsl.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="111"/>
+        <CursorPos Y="140"/>
+        <UsageCount Value="10"/>
+      </Unit16>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="homescreen.pas"/>
-        <Caret Line="325" TopLine="81"/>
+        <Caret Line="249" TopLine="161"/>
       </Position1>
       <Position2>
-        <Filename Value="partnerstack.pas"/>
-        <Caret Line="131" Column="45" TopLine="113"/>
+        <Filename Value="variables.pas"/>
+        <Caret Line="128" TopLine="105"/>
       </Position2>
       <Position3>
-        <Filename Value="partnerstack.pas"/>
-        <Caret Line="39" Column="44"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="251" TopLine="161"/>
       </Position3>
       <Position4>
-        <Filename Value="partnerstack.pas"/>
-        <Caret Line="81" Column="44" TopLine="57"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="227" TopLine="161"/>
       </Position4>
       <Position5>
-        <Filename Value="vertexstack.pas"/>
-        <Caret Line="85" Column="20" TopLine="44"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="303" TopLine="272"/>
       </Position5>
       <Position6>
-        <Filename Value="edgestack.pas"/>
-        <Caret Line="68" Column="38" TopLine="37"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="304" TopLine="272"/>
       </Position6>
       <Position7>
-        <Filename Value="edgestack.pas"/>
-        <Caret Line="29" Column="40" TopLine="44"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="305" TopLine="272"/>
       </Position7>
       <Position8>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="28" Column="3" TopLine="10"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="308" TopLine="272"/>
       </Position8>
       <Position9>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="230" Column="14" TopLine="205"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="310" TopLine="272"/>
       </Position9>
       <Position10>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="253" Column="26" TopLine="208"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="310" TopLine="272"/>
       </Position10>
       <Position11>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="56" Column="14" TopLine="28"/>
+        <Filename Value="homescreen.pas"/>
+        <Caret Line="311" TopLine="272"/>
       </Position11>
       <Position12>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="55" Column="15" TopLine="31"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="135" TopLine="108"/>
       </Position12>
       <Position13>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="56" Column="24" TopLine="31"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="139" TopLine="108"/>
       </Position13>
       <Position14>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="30" TopLine="25"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="142" TopLine="108"/>
       </Position14>
       <Position15>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="27" TopLine="25"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="145" TopLine="108"/>
       </Position15>
       <Position16>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="52" Column="26" TopLine="29"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="147" TopLine="108"/>
       </Position16>
       <Position17>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="232" Column="43" TopLine="200"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="70" TopLine="43"/>
       </Position17>
       <Position18>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="141" Column="46" TopLine="62"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="158" TopLine="123"/>
       </Position18>
       <Position19>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="78" Column="28" TopLine="55"/>
+        <Filename Value="partnerstack.pas"/>
+        <Caret Line="149" Column="23" TopLine="129"/>
       </Position19>
       <Position20>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="93" Column="28" TopLine="55"/>
+        <Filename Value="edgestack.pas"/>
+        <Caret Line="66" TopLine="49"/>
       </Position20>
       <Position21>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="17" TopLine="6"/>
+        <Caret Line="159" Column="44" TopLine="144"/>
       </Position21>
       <Position22>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="108" Column="27" TopLine="99"/>
+        <Caret Line="217" Column="21" TopLine="139"/>
       </Position22>
       <Position23>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="135" Column="4" TopLine="91"/>
+        <Caret Line="84" Column="12" TopLine="60"/>
       </Position23>
       <Position24>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="139" Column="27" TopLine="115"/>
+        <Caret Line="241" Column="32" TopLine="108"/>
       </Position24>
       <Position25>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="164" Column="23" TopLine="141"/>
+        <Caret Line="230" Column="119" TopLine="108"/>
       </Position25>
       <Position26>
-        <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="212" Column="4" TopLine="168"/>
+        <Filename Value="edgestack.pas"/>
+        <Caret Line="17" Column="5"/>
       </Position26>
       <Position27>
-        <Filename Value="variables.pas"/>
-        <Caret Line="22" Column="17"/>
+        <Filename Value="hopcroftkarp.pas"/>
+        <Caret Line="251" Column="41" TopLine="140"/>
       </Position27>
       <Position28>
-        <Filename Value="variables.pas"/>
-        <Caret Line="23" Column="3"/>
+        <Filename Value="hopcroftkarp.pas"/>
+        <Caret Line="244" Column="13" TopLine="216"/>
       </Position28>
       <Position29>
-        <Filename Value="variables.pas"/>
-        <Caret Line="37" Column="86"/>
+        <Filename Value="hopcroftkarp.pas"/>
+        <Caret Line="243" Column="3" TopLine="216"/>
       </Position29>
       <Position30>
-        <Filename Value="variables.pas"/>
-        <Caret Line="23" Column="3"/>
+        <Filename Value="hopcroftkarp.pas"/>
+        <Caret Line="237" Column="14" TopLine="216"/>
       </Position30>
     </JumpHistory>
     <RunParams>

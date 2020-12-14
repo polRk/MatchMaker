@@ -130,15 +130,12 @@ end;
 { Процедура удаления элемента по указателю из стэка }
 procedure Delete(var Top: PartnerNode; var P: PartnerNode);
 var
-  TempNode: PartnerNode;
+  TempNode: PartnerNode = nil;
 begin
   if (Top = nil) or (P = nil) then
     Exit;
 
-  // Сохраняю ссылку на верхний элемент списка
-  TempNode := Top;
-
-  // Пока не дошли до конца списка
+  // Пока не дошли до конца стэка
   while Top <> nil do
   begin
     // Если верхний элемент - нужный элемент, то удаляю и выхожу из цикла
@@ -148,12 +145,14 @@ begin
       break;
     end;
 
-    // Заменяю верхний элемент списка последующим
-    Top := Top^.Next;
+    // Иные элементы добавляю во временный стэк
+    if Top <> nil then
+      Push(TempNode, Pop(Top));
   end;
 
-  // Восстанавливаю ссылку на верхний элемент списка
-  Top := TempNode;
+  // Добавляю элементы из временного стэка на верх переданного стэк
+  while TempNode <> nil do
+    Push(Top, Pop(TempNode));
 end;
 
 { Процедура освобождения памяти занятой стэком }
