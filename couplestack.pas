@@ -30,7 +30,7 @@ procedure Free(var Top: CoupleNode);
 
 implementation
 
-{ Создание новой вершины }
+{ Создание новой пары }
 function NewCouple(const Bride: TPartner; const Groom: TPartner): TCouple;
 var
   C: TCouple;
@@ -40,7 +40,7 @@ begin
   Result := C;
 end;
 
-{ Процедура удаления верхнего(последнего) элемента стэка }
+{ Процедура удаления верхнего элемента стэка }
 function Pop(var Top: CoupleNode): TCouple;
 var
   TempNode: CoupleNode = nil;

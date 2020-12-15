@@ -45,7 +45,7 @@ begin
   Result := V;
 end;
 
-{ Процедура удаления верхнего(последнего) элемента стэка }
+{ Процедура удаления верхнего элемента стэка }
 function Pop(var Top: VertexNode): Vertex;
 var
   TempNode: VertexNode = nil;
