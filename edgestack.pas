@@ -42,7 +42,7 @@ begin
   Result := E;
 end;
 
-{ Процедура удаления верхнего(последнего) элемента стэка }
+{ Процедура удаления верхнего элемента стэка }
 function Pop(var Top: EdgeNode): Edge;
 var
   TempNode: EdgeNode = nil;
@@ -72,7 +72,7 @@ begin
   if (Top = nil) or (E = nil) then
     Exit;
 
-  // Пока не дошли до конца стэка
+  // Пока не дошел до конца стэка
   while Top <> nil do
   begin
     // Если верхний элемент - нужный элемент, то удаляю и выхожу из цикла
