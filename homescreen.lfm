@@ -1,18 +1,18 @@
 object HomeForm: THomeForm
-  Left = 0
+  Left = 1523
   Height = 472
-  Top = 103
+  Top = 115
   Width = 492
   Caption = 'Сваха +'
-  ClientHeight = 472
+  ClientHeight = 452
   ClientWidth = 492
   Menu = HomeMenu
   OnClose = FormClose
   OnCreate = FormCreate
-  LCLVersion = '2.0.8.0'
+  LCLVersion = '2.0.10.0'
   object Pages: TPageControl
     Left = 8
-    Height = 456
+    Height = 436
     Top = 8
     Width = 476
     ActivePage = GroomsPage
@@ -22,30 +22,30 @@ object HomeForm: THomeForm
     TabOrder = 0
     object BridesPage: TTabSheet
       Caption = 'Список невест'
-      ClientHeight = 426
-      ClientWidth = 470
+      ClientHeight = 408
+      ClientWidth = 468
       object BridesListBox: TListBox
         Left = 8
-        Height = 410
+        Height = 392
         Top = 8
-        Width = 454
+        Width = 452
         Align = alClient
         BorderSpacing.Around = 8
         ItemHeight = 0
-        OnSelectionChange = BridesActionsToggle
+        OnSelectionChange = onBridePopup
         PopupMenu = BridesListPopup
         TabOrder = 0
       end
     end
     object GroomsPage: TTabSheet
       Caption = 'Список женихов'
-      ClientHeight = 426
-      ClientWidth = 470
+      ClientHeight = 408
+      ClientWidth = 468
       object GroomsListBox: TListBox
         Left = 8
-        Height = 410
+        Height = 392
         Top = 8
-        Width = 454
+        Width = 452
         Align = alClient
         BorderSpacing.Left = 8
         BorderSpacing.Top = 8
@@ -53,22 +53,22 @@ object HomeForm: THomeForm
         BorderSpacing.Bottom = 8
         Color = clNone
         ItemHeight = 0
-        OnSelectionChange = GroomsActionsToggle
+        OnSelectionChange = OnGroomPopup
         PopupMenu = GroomsListPopup
         TabOrder = 0
       end
     end
     object CouplesPage: TTabSheet
       Caption = 'Список пар'
-      ClientHeight = 426
-      ClientWidth = 470
+      ClientHeight = 408
+      ClientWidth = 468
       OnHide = CouplesPageHide
       OnShow = CouplesPageShow
       object CouplesListBox: TListBox
         Left = 8
-        Height = 410
+        Height = 392
         Top = 8
-        Width = 454
+        Width = 452
         Align = alClient
         BorderSpacing.Left = 8
         BorderSpacing.Top = 8
@@ -81,9 +81,9 @@ object HomeForm: THomeForm
     end
   end
   object BridesListPopup: TPopupMenu
-    OnPopup = BridesActionsToggle
-    left = 232
-    top = 48
+    OnPopup = onBridePopup
+    Left = 232
+    Top = 48
     object BridesFile: TMenuItem
       Caption = 'Файл'
       object BridesFileOpen: TMenuItem
@@ -110,9 +110,9 @@ object HomeForm: THomeForm
     end
   end
   object GroomsListPopup: TPopupMenu
-    OnPopup = GroomsActionsToggle
-    left = 232
-    top = 104
+    OnPopup = OnGroomPopup
+    Left = 232
+    Top = 104
     object GroomsFile: TMenuItem
       Caption = 'Файл'
       object GroomsFileOpen: TMenuItem
@@ -136,14 +136,14 @@ object HomeForm: THomeForm
     end
   end
   object Actions: TActionList
-    left = 232
-    top = 216
+    Left = 232
+    Top = 216
     object FileOpen: TFileOpen
       Category = 'File'
       Caption = 'Открыть ...'
       Dialog.Options = [ofFileMustExist, ofCreatePrompt, ofEnableSizing, ofViewDetail]
       ShortCut = 16463
-      OnAccept = FileOpenAccept
+      OnAccept = OnFileOpen
     end
     object FileSave: TAction
       Category = 'File'
@@ -151,39 +151,39 @@ object HomeForm: THomeForm
       DisableIfNoHandler = False
       Enabled = False
       Hint = 'Сохранить'
-      OnExecute = FileSaveExecute
+      OnExecute = OnFileSave
       ShortCut = 16467
     end
     object FileSaveAs: TFileSaveAs
       Category = 'File'
       Caption = 'Сохранить как ...'
       ShortCut = 24659
-      OnAccept = FileSaveAsAccept
+      OnAccept = OnFileSaveAs
     end
     object PartnerAdd: TAction
       Caption = 'Добавить'
       DisableIfNoHandler = False
-      OnExecute = PartnerAddExecute
+      OnExecute = OnPartnerAdd
       ShortCut = 16449
     end
     object PartnerEdit: TAction
       Caption = 'Редактировать'
       DisableIfNoHandler = False
       Enabled = False
-      OnExecute = PartnerEditExecute
+      OnExecute = OnPartnerEdit
       ShortCut = 16453
     end
     object PartnerRemove: TAction
       Caption = 'Удалить'
       DisableIfNoHandler = False
       Enabled = False
-      OnExecute = PartnerRemoveExecute
+      OnExecute = OnPartnerRemove
       ShortCut = 16466
     end
   end
   object HomeMenu: TMainMenu
-    left = 232
-    top = 272
+    Left = 232
+    Top = 272
     object MenuFileGroup: TMenuItem
       Caption = 'Файл'
       object MenuFileOpen: TMenuItem
@@ -194,6 +194,7 @@ object HomeForm: THomeForm
       end
       object MenuFileSaveAs: TMenuItem
         Action = FileSaveAs
+        Enabled = False
       end
     end
     object MenuEditGroup: TMenuItem
@@ -210,8 +211,8 @@ object HomeForm: THomeForm
     end
   end
   object CouplesListPopup: TPopupMenu
-    left = 232
-    top = 160
+    Left = 232
+    Top = 160
     object CouplesFileSaveAs: TMenuItem
       Action = FileSaveAs
     end
