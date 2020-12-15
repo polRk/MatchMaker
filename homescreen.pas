@@ -58,20 +58,19 @@ type
     CouplesPage: TTabSheet;
     BridesListPopup: TPopupMenu;
 
+    procedure FormClose(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
     procedure CouplesPageHide(Sender: TObject);
     procedure CouplesPageShow(Sender: TObject);
 
     procedure onBridePopup(Sender: TObject);
-
     procedure OnGroomPopup(Sender: TObject);
 
     procedure OnFileSave(Sender: TObject);
-
     procedure OnFileOpen(Sender: TObject);
     procedure OnFileSaveAs(Sender: TObject);
-    procedure FormClose(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+
     procedure OnPartnerAdd(Sender: TObject);
     procedure OnPartnerEdit(Sender: TObject);
     procedure OnPartnerRemove(Sender: TObject);
