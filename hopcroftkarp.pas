@@ -25,8 +25,8 @@ type
 
 { BipartiteGraph }
 function FindMaxCouples(var Brides: PartnerNode; var Grooms: PartnerNode): CoupleNode;
-function GraphDFS(var G: TBipartiteGraph; var V: VertexNode): boolean;
-function GraphBFS(var G: TBipartiteGraph): VertexNode;
+function GraphDFS(var G: TBipartiteGraph; var V: Vertex): boolean;
+function GraphBFS(var G: TBipartiteGraph): Vertex;
 
 {Helpers}
 procedure CleanVisitedMarks(var G: TBipartiteGraph);
@@ -39,7 +39,7 @@ function FindMaxCouples(var Brides: PartnerNode; var Grooms: PartnerNode): Coupl
 var
   TempBrides: VertexNode = nil;
   TempGrooms: VertexNode = nil;
-  FreeVertex: VertexNode = nil;
+  FreeVertex: Vertex = nil;
 
   C: TCouple;
   G: TBipartiteGraph = (Brides: nil; Grooms: nil; Matches: nil; AugmentingPath: nil);
@@ -95,15 +95,13 @@ begin
     // Если нет дополняющего пути из свободной вершины,
     // то помечаю вершину как несвободную
     if GraphDFS(G, FreeVertex) <> True then
-      FreeVertex^.Data^.IsFree := False
+      FreeVertex^.IsFree := False
     else
       // Иначе, увеличиваю стэк пар за счет увеличивающегося пути.
       GetMatches(G);
 
     // Убираю отметки о посещении
     CleanVisitedMarks(G);
-    // Удаляю дополняющий путь
-    EdgeStack.Free(G.AugmentingPath);
     // Получаю следующую свободную вершину
     FreeVertex := GraphBFS(G);
   end;
@@ -112,8 +110,8 @@ begin
   while G.Matches <> nil do
   begin
     // Создаю новую пару
-    C := CoupleStack.NewCouple(G.Matches^.Data^.Bride^.Data^.Partner,
-      G.Matches^.Data^.Groom^.Data^.Partner);
+    C := CoupleStack.NewCouple(G.Matches^.Data^.Bride^.Partner,
+      G.Matches^.Data^.Groom^.Partner);
 
     // Добавляю пару в результат работы функции(стэк пар)
     CoupleStack.Push(Result, C);
@@ -127,9 +125,8 @@ begin
   VertexStack.Free(G.Grooms);
 end;
 
-{ Обход графа в ширину. Поиск первой свободной точки }
-function GraphBFS(var G: TBipartiteGraph): VertexNode;
-
+{ Обход графа в ширину. Поиск первой свободной вершины }
+function GraphBFS(var G: TBipartiteGraph): Vertex;
 var
   TempBride: VertexNode;
   TempGroom: VertexNode;
@@ -140,12 +137,12 @@ begin
   // Сохраняю ссылку на верх стэка женихов
   TempGroom := G.Grooms;
 
-  // // Пока не дошел до конца стэка и не нашёл свободную вершину
+  // Пока не дошел до конца стэка и не нашёл свободную вершину
   while (G.Grooms <> nil) and (Result = nil) do
   begin
     // Если вершина свободная, то записываем указатель в результат функции
     if G.Grooms^.Data^.IsFree then
-      Result := G.Grooms;
+      Result := G.Grooms^.Data;
 
     G.Grooms := G.Grooms^.Next;
   end;
@@ -155,7 +152,7 @@ begin
   begin
     // Если вершина свободная, то записываем указатель в результат функции
     if G.Brides^.Data^.IsFree then
-      Result := G.Brides;
+      Result := G.Brides^.Data;
 
     G.Brides := G.Brides^.Next;
   end;
@@ -165,49 +162,50 @@ begin
   G.Grooms := TempGroom;
 end;
 
-{ Обход графа в глубину начиная от вершины V. Поиск дополняющего пути }
-function GraphDFS(var G: TBipartiteGraph; var V: VertexNode): boolean;
+{ Обход графа в глубину начиная от вершины V. Поиск увеличивающего пути }
+function GraphDFS(var G: TBipartiteGraph; var V: Vertex): boolean;
 var
-  TempNode: VertexNode;
-  SuitablePartner: VertexNode;
+  TempNode: VertexNode = nil;
+  SuitablePartner: Vertex = nil;
 begin
   // Если переданная вершина несуществует или была посещена,
-  // то выхожу из функции с результатом того, что нет дополняющего пути
-  if (V = nil) or V^.Data^.IsVisited then
+  // то выхожу из функции с результатом того, что нет увеличивающего пути
+  if (V = nil) or V^.IsVisited then
   begin
     Result := False;
     Exit;
   end;
 
-  // Помечаю точку как посещенную
-  V^.Data^.IsVisited := True;
+  // Помечаю вершину как посещенную
+  V^.IsVisited := True;
+
   // Сохраняю ссылку на верх стэка подходящих партнеров
-  TempNode := V^.Data^.SuitablePartners;
+  TempNode := V^.SuitablePartners;
 
   // Пока не дошел до конца стэка
-  while V^.Data^.SuitablePartners <> nil do
+  while V^.SuitablePartners <> nil do
   begin
-    SuitablePartner := V^.Data^.SuitablePartners;
+    SuitablePartner := V^.SuitablePartners^.Data;
 
-    // Если подходящий партнер свободен или есть дополняющий путь,
+    // Если подходящий партнер свободен или есть увеличивающий путь,
     // то добавляю пару в список совпадений.
-    if SuitablePartner^.Data^.IsFree or GraphDFS(G, SuitablePartner) then
+    if SuitablePartner^.IsFree or GraphDFS(G, SuitablePartner) then
     begin
 
-      // Добавляю пару в дополняющий путь
+      // Отмечаю вершину как занятую(есть партнер)
+      V^.IsFree := False;
+      // Отмечаю вершину подходящего партнера как занятую(есть партнер)
+      SuitablePartner^.IsFree := False;
+
+      // Добавляю пару в увеличивающий путь
       // Невеста всегда идет первая в паре
-      if V^.Data^.Partner.Sex = PartnerSex.man then
+      if V^.Partner.Sex = PartnerSex.man then
         EdgeStack.Push(G.AugmentingPath, EdgeStack.NewEdge(SuitablePartner, V))
       else
         EdgeStack.Push(G.AugmentingPath, EdgeStack.NewEdge(V, SuitablePartner));
 
-      // Отмечаем точку как занятую(есть партнер)
-      V^.Data^.IsFree := False;
-      // Отмечаем точку подходящего партнера как занятую(есть партнер)
-      SuitablePartner^.Data^.IsFree := False;
-
       // Восстанавливаю ссылку на верх стэка подходящих партнеров
-      V^.Data^.SuitablePartners := TempNode;
+      V^.SuitablePartners := TempNode;
 
       // Выхожу с положительным результатом
       // (нашли свободного партнера или дополняющий путь)
@@ -215,11 +213,11 @@ begin
       Exit;
     end;
 
-    V^.Data^.SuitablePartners := V^.Data^.SuitablePartners^.Next;
+    V^.SuitablePartners := V^.SuitablePartners^.Next;
   end;
 
   // Восстанавливаю ссылку на верх стэка подходящих партнеров
-  V^.Data^.SuitablePartners := TempNode;
+  V^.SuitablePartners := TempNode;
 
   // В иных случаях пути не существует.
   Result := False;
@@ -228,8 +226,7 @@ end;
 { Процедура удаления отметок о посещении }
 procedure CleanVisitedMarks(var G: TBipartiteGraph);
 var
-  TempVertex: VertexNode;
-  TempNode: VertexNode;
+  TempNode: VertexNode = nil;
 begin
   // Сохраняю ссылку на верх стэка невест
   TempNode := G.Brides;
@@ -260,13 +257,13 @@ begin
   G.Grooms := TempNode;
 end;
 
-{ Процедура увеличения списка сочетаний }
+{ Процедура увеличения наибольшего паросочетания }
 procedure GetMatches(var G: TBipartiteGraph);
 var
   TempAugmentingPath: EdgeNode = nil;
   TempMatches: EdgeNode = nil;
 begin
-  // Сохраняю ссылку на верх стэка дополняющего пути
+  // Сохраняю ссылку на верх стэка увеличивающего пути
   TempAugmentingPath := G.AugmentingPath;
 
   // Пока не дошел до конца стэка
@@ -276,29 +273,32 @@ begin
     TempMatches := G.Matches;
 
     // Пока не дошел до конца стэка
-    while G.Matches <> nil do
+    while (G.Matches <> nil) and (G.AugmentingPath <> nil) do
     begin
-      // Если звено есть и в дополняющем пути, и в стэке совпадений,
+      // Если звено есть и в увеличивающим пути, и в стэке совпадений,
       // тогда удаляю это звено из обоих стэков (симметрическая разность)
-      if (G.Matches^.Data^.Bride^.Data = G.AugmentingPath^.Data^.Bride^.Data) and
-        (G.Matches^.Data^.Groom^.Data = G.AugmentingPath^.Data^.Groom^.Data) then
+      if (G.Matches^.Data^.Bride = G.AugmentingPath^.Data^.Bride) and
+        (G.Matches^.Data^.Groom = G.AugmentingPath^.Data^.Groom) then
       begin
         EdgeStack.Delete(TempAugmentingPath, G.AugmentingPath);
         EdgeStack.Delete(TempMatches, G.Matches);
       end;
 
-      G.Matches := G.Matches^.Next;
+      if G.Matches <> nil then
+        G.Matches := G.Matches^.Next;
     end;
 
     // Восстанавливаю ссылку на верх стэка совпадений
     G.Matches := TempMatches;
-    G.AugmentingPath := G.AugmentingPath^.Next;
+
+    if G.AugmentingPath <> nil then
+      G.AugmentingPath := G.AugmentingPath^.Next;
   end;
 
-  // Восстанавливаю ссылку на верх стэка дополняющего пути
+  // Восстанавливаю ссылку на верх стэка увеличивающего пути
   G.AugmentingPath := TempAugmentingPath;
 
-  // Добавляю новые звенья дополняющего пути в стэк совпадений
+  // Добавляю новые звенья увеличивающего пути в стэк совпадений
   // Пока не дошел до конца стэка
   while G.AugmentingPath <> nil do
   begin

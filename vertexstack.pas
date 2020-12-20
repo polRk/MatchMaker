@@ -8,11 +8,11 @@ uses
   Classes, SysUtils, PartnerStack;
 
 type
-  VertexNode = ^TVertexNode;
+  VertexNode = ^TVertexNode; // ссылка на элемент списка вершин графа
 
   Vertex = ^TVertex;
 
-  TVertex = record
+  TVertex = record // вершина графа
     Partner: TPartner;
     SuitablePartners: VertexNode; // Подходящие партнеры
 
@@ -21,7 +21,7 @@ type
   end;
 
 
-  TVertexNode = record
+  TVertexNode = record // элемент списка вершин графа
     Data: Vertex;
     Next: VertexNode;
   end;

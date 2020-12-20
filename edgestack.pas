@@ -8,21 +8,21 @@ uses
   Classes, SysUtils, VertexStack;
 
 type
-  EdgeNode = ^TEdgeNode;
+  EdgeNode = ^TEdgeNode; // ссылка на элемент списка ребер графа
 
   Edge = ^TEdge;
 
-  TEdge = record
-    Bride: VertexNode;
-    Groom: VertexNode;
+  TEdge = record // ребро графа
+    Bride: Vertex;
+    Groom: Vertex;
   end;
 
-  TEdgeNode = record
+  TEdgeNode = record // элемент списка ребер графа
     Data: Edge;
     Next: EdgeNode;
   end;
 
-function NewEdge(const Bride: VertexNode; const Groom: VertexNode): Edge;
+function NewEdge(const Bride: Vertex; const Groom: Vertex): Edge;
 
 function Pop(var Top: EdgeNode): Edge;
 procedure Push(var Top: EdgeNode; const E: Edge);
@@ -31,8 +31,8 @@ procedure Free(var Top: EdgeNode);
 
 implementation
 
-{ Создание нового звена }
-function NewEdge(const Bride: VertexNode; const Groom: VertexNode): Edge;
+{ Создание нового ребра }
+function NewEdge(const Bride: Vertex; const Groom: Vertex): Edge;
 var
   E: Edge = nil;
 begin
