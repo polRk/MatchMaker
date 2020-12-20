@@ -127,6 +127,7 @@ begin
   VertexStack.Free(G.Grooms);
 end;
 
+
 { Обход графа в ширину. Поиск первой свободной точки }
 function GraphBFS(var G: TBipartiteGraph): VertexNode;
 
@@ -231,32 +232,25 @@ var
   TempVertex: VertexNode;
   TempNode: VertexNode;
 begin
-  // Сохраняю ссылку на верх стэка невест
-  TempNode := G.Brides;
+  TempVertex := G.Brides;
 
-  // Пока не дошел до конца стэка
   while G.Brides <> nil do
   begin
-    // Удаляю отметку о песещении
     G.Brides^.Data^.IsVisited := False;
     G.Brides := G.Brides^.Next;
   end;
+  TempNode := G.Brides;
 
-  // Восстанавливаю ссылку на верх стэка невест
-  G.Brides := TempNode;
+  G.Brides := TempVertex;
+  TempVertex := G.Grooms;
 
-  // Сохраняю ссылку на верх стэка невест
-  TempNode := G.Grooms;
-
-  // Пока не дошел до конца стэка
   while G.Grooms <> nil do
   begin
-    // Удаляю отметку о песещении
     G.Grooms^.Data^.IsVisited := False;
     G.Grooms := G.Grooms^.Next;
   end;
 
-  // Восстанавливаю ссылку на верх стэка женихов
+  G.Grooms := TempVertex;
   G.Grooms := TempNode;
 end;
 
@@ -331,3 +325,4 @@ begin
 end;
 
 end.
+

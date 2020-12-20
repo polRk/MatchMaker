@@ -49,12 +49,10 @@
         <UnitName Value="HopcroftKarp"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="224"/>
-        <CursorPos X="39" Y="231"/>
+        <TopLine Value="127"/>
+        <CursorPos X="39" Y="251"/>
         <UsageCount Value="230"/>
-        <Bookmarks Count="1">
-          <Item0 Y="25"/>
-        </Bookmarks>
+        <Bookmarks Count="1"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -89,8 +87,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="EdgeStack"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="12"/>
-        <CursorPos X="14" Y="32"/>
+        <TopLine Value="57"/>
+        <CursorPos X="37" Y="23"/>
         <UsageCount Value="309"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -99,7 +97,7 @@
         <UnitName Value="CoupleStack"/>
         <EditorIndex Value="1"/>
         <TopLine Value="27"/>
-        <CursorPos Y="27"/>
+        <CursorPos X="23" Y="60"/>
         <UsageCount Value="176"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -107,123 +105,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="290" TopLine="274"/>
+        <Caret Line="307" TopLine="274"/>
       </Position1>
       <Position2>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="297" TopLine="274"/>
+        <Caret Line="290" TopLine="274"/>
       </Position2>
       <Position3>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="306" TopLine="274"/>
+        <Caret Line="297" TopLine="274"/>
       </Position3>
       <Position4>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="307" TopLine="274"/>
+        <Caret Line="306" TopLine="274"/>
       </Position4>
       <Position5>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="290" TopLine="274"/>
+        <Caret Line="307" TopLine="274"/>
       </Position5>
       <Position6>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="297" TopLine="274"/>
+        <Caret Line="290" TopLine="274"/>
       </Position6>
       <Position7>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="306" TopLine="274"/>
+        <Caret Line="311" TopLine="274"/>
       </Position7>
       <Position8>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="307" TopLine="274"/>
+        <Caret Line="313" TopLine="275"/>
       </Position8>
       <Position9>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="290" TopLine="274"/>
+        <Caret Line="314" TopLine="277"/>
       </Position9>
       <Position10>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="311" TopLine="274"/>
+        <Caret Line="284" TopLine="275"/>
       </Position10>
       <Position11>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="313" TopLine="275"/>
+        <Caret Line="287" TopLine="275"/>
       </Position11>
       <Position12>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="314" TopLine="277"/>
+        <Caret Line="290" TopLine="275"/>
       </Position12>
       <Position13>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="284" TopLine="275"/>
+        <Caret Line="297" TopLine="275"/>
       </Position13>
       <Position14>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="287" TopLine="275"/>
+        <Caret Line="298" TopLine="275"/>
       </Position14>
       <Position15>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="290" TopLine="275"/>
+        <Caret Line="306" TopLine="275"/>
       </Position15>
       <Position16>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="297" TopLine="275"/>
+        <Caret Line="307" TopLine="275"/>
       </Position16>
       <Position17>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="298" TopLine="275"/>
+        <Caret Line="290" TopLine="275"/>
       </Position17>
       <Position18>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="306" TopLine="275"/>
+        <Caret Line="297" TopLine="275"/>
       </Position18>
       <Position19>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="307" TopLine="275"/>
+        <Caret Line="298" TopLine="275"/>
       </Position19>
       <Position20>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="290" TopLine="275"/>
+        <Caret Line="300" TopLine="275"/>
       </Position20>
       <Position21>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="297" TopLine="275"/>
+        <Caret Line="301" TopLine="275"/>
       </Position21>
       <Position22>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="298" TopLine="275"/>
+        <Caret Line="295" Column="70" TopLine="275"/>
       </Position22>
       <Position23>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="300" TopLine="275"/>
+        <Caret Line="288" Column="30" TopLine="275"/>
       </Position23>
       <Position24>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="301" TopLine="275"/>
+        <Caret Line="294" Column="18" TopLine="275"/>
       </Position24>
       <Position25>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="295" Column="70" TopLine="275"/>
+        <Caret Line="300" Column="16" TopLine="275"/>
       </Position25>
       <Position26>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="288" Column="30" TopLine="275"/>
+        <Caret Line="194" Column="85" TopLine="164"/>
       </Position26>
       <Position27>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="294" Column="18" TopLine="275"/>
+        <Caret Line="309" Column="42" TopLine="272"/>
       </Position27>
       <Position28>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="300" Column="16" TopLine="275"/>
+        <Caret Line="208" Column="30" TopLine="194"/>
       </Position28>
       <Position29>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="194" Column="85" TopLine="164"/>
+        <Caret Line="325" Column="5" TopLine="295"/>
       </Position29>
       <Position30>
         <Filename Value="hopcroftkarp.pas"/>
-        <Caret Line="309" Column="42" TopLine="272"/>
+        <Caret Line="226" Column="77" TopLine="226"/>
       </Position30>
     </JumpHistory>
     <RunParams>
