@@ -228,10 +228,8 @@ begin
 
     while G.Matches <> nil do
     begin
-      if (G.Matches^.Data^.Bride^.Data^.Partner.FullName =
-        G.AugmentingPath^.Data^.Bride^.Data^.Partner.FullName) and
-        (G.Matches^.Data^.Groom^.Data^.Partner.FullName =
-        G.AugmentingPath^.Data^.Groom^.Data^.Partner.FullName) then
+      if (G.Matches^.Data^.Bride^.Data = G.AugmentingPath^.Data^.Bride^.Data) and
+        (G.Matches^.Data^.Groom^.Data = G.AugmentingPath^.Data^.Groom^.Data) then
       begin
         EdgeStack.Delete(TempAugmentingPath, G.AugmentingPath);
         EdgeStack.Delete(TempMatches, G.Matches);
